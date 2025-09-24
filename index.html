@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySite - Responsive Landing Page</title>
+    <style>
+        /* CSS Variables */
+        
+         :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --success-color: #4cc9f0;
+            --text-color: #2b2d42;
+            --text-light: #8d99ae;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray-light: #e9ecef;
+            --border-radius: 8px;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+        /* Reset */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ===== HEADER STYLES ===== */
+        
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            position: relative;
+        }
+        
+        .logo h2 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+            z-index: 1001;
+        }
+        /* Mobile Menu Toggle - Hidden on desktop */
+        
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-toggle:hover {
+            background: var(--gray-light);
+            border-radius: var(--border-radius);
+        }
+        
+        .hamburger-line {
+            width: 24px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 3px 0;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+        /* Hamburger animation */
+        
+        .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        /* Navigation - Desktop First */
+        
+        .navbar {
+            display: flex;
+            transition: var(--transition);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+        /* Active link style */
+        
+        .nav-links a.active {
+            color: var(--primary-color);
+            background: rgba(67, 97, 238, 0.1);
+        }
+        /* ===== HERO SECTION ===== */
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            margin-top: 80px;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        .hero-content p {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        
+        .cta-button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            text-align: center;
+            min-height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+        }
+        
+        .cta-button.primary {
+            background: var(--accent-color);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        
+        .cta-button.primary:hover {
+            background: #d1146a;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .cta-button.secondary:hover {
+            background: var(--white);
+            color: var(--secondary-color);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        /* ===== FEATURES SECTION ===== */
+        
+        .features {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--light-bg);
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        /* ===== TESTIMONIALS SECTION ===== */
+        
+        .testimonials {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: var(--white);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonial-content p {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            font-size: 2rem;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        /* ===== CTA SECTION ===== */
+        
+        .cta-section {
+            padding: 5rem 0;
+            background: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-content h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        /* ===== FOOTER ===== */
+        
+        .footer {
+            background: #1a1a2e;
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2d3748;
+            color: #bdc3c7;
+        }
+        
+        .footer-bottom a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--primary-color);
+        }
+        /* ===== RESPONSIVE BREAKPOINTS ===== */
+        /* Small tablets and large phones (600px and up) */
+        
+        @media (min-width: 600px) {
+            .container {
+                padding: 0 2rem;
+            }
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cta-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+        /* Tablets and small laptops (768px and up) */
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+            .navbar {
+                position: static;
+                background: transparent;
+                box-shadow: none;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                width: auto;
+            }
+            .nav-links {
+                flex-direction: row;
+                gap: 2rem;
+            }
+            .nav-links li {
+                width: auto;
+                border-bottom: none;
+            }
+            .nav-links a {
+                padding: 0.5rem 1rem;
+                border-radius: var(--border-radius);
+            }
+            .nav-links a:hover {
+                background: var(--light-bg);
+            }
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        /* Tablets (768px and below) - Header specific */
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            .nav-container {
+                padding: 0.8rem 0;
+            }
+            /* Show mobile menu button */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            /* Hide desktop navigation */
+            .navbar {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: var(--white);
+                box-shadow: var(--shadow-hover);
+                overflow: hidden;
+                transition: all 0.4s ease-in-out;
+                z-index: 999;
+            }
+            /* Mobile navigation layout */
+            .nav-links {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+                padding: 2rem 0;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: all 0.3s ease 0.2s;
+            }
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links a {
+                display: block;
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+                border-radius: 0;
+                border-bottom: 1px solid var(--gray-light);
+                transition: all 0.3s ease;
+            }
+            .nav-links a::after {
+                display: none;
+            }
+            .nav-links a:hover {
+                background: var(--primary-color);
+                color: var(--white);
+                transform: translateX(10px);
+            }
+            /* Active state for mobile menu */
+            .navbar.active {
+                height: 100vh;
+                top: 100%;
+            }
+            .navbar.active .nav-links {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            /* Prevent body scroll when menu is open */
+            body.menu-open {
+                overflow: hidden;
+            }
+            body.menu-open .header {
+                box-shadow: none;
+            }
+            /* Logo adjustment for mobile */
+            .logo h2 {
+                font-size: 1.6rem;
+            }
+            /* Hero margin adjustment */
+            .hero {
+                margin-top: 70px;
+            }
+        }
+        /* Mobile Phones (480px and below) */
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .nav-container {
+                padding: 0.7rem 0;
+            }
+            .logo h2 {
+                font-size: 1.4rem;
+            }
+            .mobile-menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+            .hamburger-line {
+                width: 20px;
+                height: 2px;
+            }
+            .nav-links a {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+            .hero {
+                margin-top: 60px;
+                min-height: 80vh;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+        /* Touch device optimizations */
+        
+        @media (hover: none) and (pointer: coarse) {
+            .cta-button:hover,
+            .feature-card:hover,
+            .testimonial-card:hover {
+                transform: none;
+            }
+            .nav-links a:hover {
+                background: transparent;
+                color: var(--text-color);
+                transform: none;
+            }
+            .nav-links a:active {
+                background: var(--primary-color);
+                color: var(--white);
+            }
+            .mobile-menu-toggle:active {
+                background: var(--gray-light);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>MySite</h2>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+
+                <nav class="navbar">
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Welcome to Our Amazing Platform</h1>
+                <p>Discover innovative solutions that will transform your digital experience. Join thousands of satisfied users worldwide.</p>
+                <div class="button-group">
+                    <button class="cta-button primary">Get Started Free</button>
+                    <button class="cta-button secondary">Watch Demo</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Happy Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">Uptime</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Our Platform?</h2>
+                <p>Experience the difference with our cutting-edge features</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized performance with lightning-fast loading times and seamless user experience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile First</h3>
+                    <p>Designed specifically for mobile devices with responsive layouts that work everywhere</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bank-Level Security</h3>
+                    <p>Enterprise-grade security protocols to keep your data safe and protected</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Easy Integration</h3>
+                    <p>Simple API integration with comprehensive documentation and support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Scale</h3>
+                    <p>Worldwide infrastructure ensuring reliability and performance everywhere</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support with real human assistance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Users Say</h2>
+                <p>Join thousands of satisfied customers worldwide</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"This platform transformed our business operations. Highly recommended!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The mobile experience is exceptional. Works perfectly on all devices."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <h4>Mike Chen</h4>
+                            <p>Product Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Implementation was smooth and the results were immediate. Great value!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <h4>Emily Davis</h4>
+                            <p>Marketing Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Join thousands of businesses already using our platform</p>
+                <div class="cta-buttons">
+                    <button class="cta-button primary">Start Free Trial</button>
+                    <button class="cta-button secondary">Schedule a Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MySite</h3>
+                    <p>Building amazing digital experiences since 2024. Transforming ideas into reality.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#integrations">Integrations</a></li>
+                        <li><a href="#updates">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#press">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#status">Status</a></li>
+                        <li><a href="#api">API Docs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MySite. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navbar = document.querySelector('.navbar');
+            const body = document.body;
+
+            // Toggle mobile menu
+            function toggleMobileMenu() {
+                const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+
+                mobileMenuToggle.classList.toggle('active');
+                navbar.classList.toggle('active');
+                body.classList.toggle('menu-open');
+                mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            }
+
+            // Close mobile menu
+            function closeMobileMenu() {
+                mobileMenuToggle.classList.remove('active');
+                navbar.classList.remove('active');
+                body.classList.remove('menu-open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            // Event listeners
+            mobileMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMobileMenu();
+            });
+
+            // Close menu when clicking on nav links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMobileMenu();
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-container') && navbar.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navbar.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // CTA buttons functionality
+            document.querySelectorAll('.cta-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const buttonText = this.textContent;
+                    alert(`Thank you for your interest! "${buttonText}" action would be processed.`);
+                });
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+
+            function handleScroll() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+
+            // Set active navigation link based on scroll position
+            function setActiveNavLink() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-links a');
+
+                let currentSection = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Close mobile menu when window is resized to desktop size
+            function handleResize() {
+                if (window.innerWidth > 768 && navbar.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            }
+
+            // Initialize
+            window.addEventListener('scroll', () => {
+                handleScroll();
+                setActiveNavLink();
+            });
+
+            window.addEventListener('resize', handleResize);
+
+            // Initial call
+            handleScroll();
+            setActiveNavLink();
+        });
+    </script>
+</body>
+
+</html>
