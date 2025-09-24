@@ -225,3 +225,6 @@ Review the responsive breakpoints
 📄 License
 This project is open source and available under the MIT License.
 
+<img width="1878" height="977" alt="Screenshot 2025-09-24 233637" src="https://github.com/user-attachments/assets/a1334ff2-db8a-467f-818e-a451f8299dd3" />
+<img width="1869" height="969" alt="Screenshot 2025-09-24 233617" src="https://github.com/user-attachments/assets/a431ad10-bb79-42c3-93f7-410a4b33c2cc" />
+<img width="1866" height="968" alt="Screenshot 2025-09-24 233557" src="https://github.com/user-attachments/assets/5a7eb349-b5a5-4db8-8940-5edbd1bfe3fd" />
